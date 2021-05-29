@@ -24,6 +24,6 @@ to = [
 
 while (True):
     time.sleep(1)
-    teleMessage(API_ID, API_HASH, PHONE, '+917977480148', 'App is Running.')
+    teleMessage(API_ID, API_HASH, PHONE, ["+917977480148"], 'App is Running.')
     if (slots(districtID(DISTRICT, stateID(STATE)))):
         teleMessage(API_ID, API_HASH, PHONE, to, f'Slot Available on https://www.cowin.gov.in/home for 18+ dose 1')
