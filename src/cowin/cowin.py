@@ -1,6 +1,6 @@
 import requests
-from datetime import date
-
+from datetime import datetime
+import pytz
 
 headers = {
     "accept": "application/json",
@@ -27,10 +27,10 @@ def districtID(district_name, state_id):
 def slots(district_id):
     if district_id == -1:
         return False
-    year = date.today().year
-    month = date.today().month
-    day = date.today().day
-    date_value = f'{day}' + '-' + f'{month}' + '-' + f'{year}'
+    
+    IST = pytz.timezone('Asia/Kolkata')
+    date_value = datetime.now(IST)
+    date_value = date_value.strftime("%d-%m-%Y")
     slots = requests.get(f'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id={district_id}&date={date_value}', headers=headers).json()['sessions']
     if len(slots) == 0:
         return False
