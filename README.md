@@ -1,4 +1,5 @@
 # cowin-notification
+*Works only within India*
 Set the following ENV variables before deployment:
 
 API_ID (Telegram API)
