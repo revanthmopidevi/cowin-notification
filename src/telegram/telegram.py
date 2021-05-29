@@ -7,7 +7,7 @@ from telethon import TelegramClient, sync, events
 
 
 
-def teleMessage(API_ID, API_HASH, PHONE, TO, message):
+def teleMessage(API_ID, API_HASH, PHONE, to, message):
     client = TelegramClient('session', API_ID, API_HASH)
     client.connect()
 
@@ -17,8 +17,9 @@ def teleMessage(API_ID, API_HASH, PHONE, TO, message):
     
     try:
         # receiver = InputPeerUser('user_id', 'user_hash')
-        to = client.get_input_entity(TO)
-        client.send_message(to, message, parse_mode='html')
+        for each in to:
+            recipient = client.get_input_entity(each)
+            client.send_message(recipient, message, parse_mode='html')
     except Exception as e:
         print(e);
  

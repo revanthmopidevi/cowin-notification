@@ -1,6 +1,7 @@
 import requests
 from datetime import date
 
+
 headers = {
     "accept": "application/json",
     "Accept-Language": "hi_IN",
@@ -28,12 +29,12 @@ def slots(district_id):
         return False
     year = date.today().year
     month = date.today().month
-    day = date.today().day + 1 
+    day = date.today().day
     date_value = f'{day}' + '-' + f'{month}' + '-' + f'{year}'
     slots = requests.get(f'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id={district_id}&date={date_value}', headers=headers).json()['sessions']
     if len(slots) == 0:
         return False
     for slot in slots:
-        if slot['min_age_limit'] == 18:
+        if slot['min_age_limit'] == 18 and slot['available_capacity_dose1'] > 0:
             return True
     return False
